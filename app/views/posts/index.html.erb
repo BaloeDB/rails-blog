@@ -1,3 +1,17 @@
-<h1>Posts</h1>
+<h1>Blog</h1>
 <h2>Welcome, <%= @user %>!</h2>
-<%= link_to "Logout",  user_session_path(@session, method: :destroy) %>
+
+<br />
+<%= link_to "Link: Logout",  user_session_path(@session, method: :destroy) %>
+<br />
+<%= link_to "Action: New Post",  new_post_path %>
+
+<br /><br />
+<h3>Posts: </h3>
+<ul>
+  <% @posts.each do |post| %>
+    <li>
+      <%= link_to post.title, post %>
+    </li>
+  <% end %>
+</ul>

@@ -1,1 +1,18 @@
-<h1>Show Post</h1>
+<%= link_to "Link: Home",  root_path %>
+
+<br /><br />
+<h1>Title: <%= @post.title %></h1>
+
+<p>Body: <%= @post.body %></p>
+<p>User: <%= @user %></p>
+<p>Created At: <%= @post.created_at %></p>
+<p>Updated At: <%= @post.updated_at %></p>
+
+<br />
+<ul>
+  <li><%= link_to "Action: Edit", edit_post_path(@post) %></li>
+  <li><%= link_to "Action: Destroy", post_path(@post), data: {
+                    turbo_method: :delete,
+                    turbo_confirm: "Are you sure?"
+                  } %></li>
+</ul>
