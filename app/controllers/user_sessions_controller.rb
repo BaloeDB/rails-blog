@@ -1,4 +1,11 @@
 class UserSessionsController < ApplicationController
+    skip_before_action :require_login, only: [:new, :create]
+  
+    # Somehow this methods get called instead of destroy, why?
+    def show
+      destroy()
+    end
+  
     def new
       @user_session = UserSession.new
     end
@@ -14,7 +21,7 @@ class UserSessionsController < ApplicationController
   
     def destroy
       current_user_session.destroy
-      redirect_to new_user_session_url
+      redirect_to root_path
     end
   
     private
