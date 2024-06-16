@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
     helper_method :current_user_session, :current_user
+    before_action :require_login
   
     private
       def current_user_session
@@ -12,8 +13,15 @@ class ApplicationController < ActionController::Base
         @current_user = current_user_session && current_user_session.user
       end
 
+    private
+      def require_login
+        unless current_user != nil
+          flash[:error] = "You must be logged in to access this section"
+          redirect_to new_user_session_path # halts request cycle
+        end
+      end
+
     protected
-    
     def handle_unverified_request
         # raise an exception
         fail ActionController::InvalidAuthenticityToken
