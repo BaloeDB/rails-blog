@@ -72,3 +72,8 @@ gem 'authlogic'
 # The scrypt key derivation function is designed to be far more 
 # secure against hardware brute-force attacks than alternative functions such as PBKDF2 or bcrypt.
 gem "scrypt", "~> 3.0"
+
+# Tailwind CSS is a utility-first CSS framework packed with classes 
+# like flex, pt-4, text-center and rotate-90 that can be composed to build any design, 
+# directly in your markup.
+gem "tailwindcss-rails", "~> 2.6"
