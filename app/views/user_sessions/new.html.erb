@@ -15,8 +15,7 @@
   <%= f.label :password %><br />
   <%= f.password_field :password %><br />
   <br />
-  <%= f.label :remember_me %><br />
-  <%= f.check_box :remember_me %><br />
-  <br />
   <%= f.submit "Login" %>
+  <br /><br />
+  <%= link_to "Don't have an account? Register", new_user_path   %>
 <% end %>
