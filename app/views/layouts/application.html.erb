@@ -13,10 +13,10 @@
 
   <body>
     <nav>
-      <% if !@user.nil? %>
-        <h1>Welcome to the blog, <%= @user %>!</h1>
-        <%= link_to "Link: Logout",  user_session_path(@session, method: :destroy) %>
-        <br /><br />
+      <% if !@current_user.nil? %>
+        <h1>Welcome to the blog, <%= @current_user.login %>!</h1>
+        <%= link_to "Link: Logout",  user_session_path(@current_user_session, method: :destroy) %>
+        <br /><br>
       <% end %>
     </nav>
     <main>

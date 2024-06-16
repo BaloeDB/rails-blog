@@ -1,15 +1,14 @@
-# Should only be able to edit and delete your own posts
-
 class PostsController < ApplicationController
+    skip_before_action :require_permission, only: [:show]
+
     def index
         @posts = Post.all
-        @user = current_user.login
-        @session = current_user_session
     end
 
     def show
         @post = Post.find(params[:id])
         @user = User.find(@post.user_id).login
+        @can_edit = @post.user == current_user
     end
 
     def new
@@ -42,6 +41,9 @@ class PostsController < ApplicationController
 
     def destroy
         @post = Post.find(params[:id])
+        if current_user.id != @post.user_id
+            redirect_to @post
+        end
         @post.destroy
 
         redirect_to root_path, status: :see_other

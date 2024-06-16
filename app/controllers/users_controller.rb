@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
     skip_before_action :require_login, only: [:new, :create]
+    skip_before_action :require_permission, only: [:new, :create]
     
     def index
       @users = User.all
