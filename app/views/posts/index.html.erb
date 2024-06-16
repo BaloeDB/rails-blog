@@ -1,1 +1,3 @@
 <h1>Posts</h1>
+<h2>Welcome, <%= @user %>!</h2>
+<%= link_to "Logout",  user_session_path(@session, method: :destroy) %>
