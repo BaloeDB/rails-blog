@@ -68,3 +68,7 @@ end
 
 # Authlogic - An unobtrusive ruby authentication library based on ActiveRecord.
 gem 'authlogic'
+
+# The scrypt key derivation function is designed to be far more 
+# secure against hardware brute-force attacks than alternative functions such as PBKDF2 or bcrypt.
+gem "scrypt", "~> 3.0"
