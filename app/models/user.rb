@@ -1,5 +1,7 @@
 class User < ApplicationRecord
-    acts_as_authentic
+    acts_as_authentic do |c|
+        c.crypto_provider = ::Authlogic::CryptoProviders::SCrypt
+    end
   
     # Validate email, login, and password as you see fit.
     #
