@@ -65,3 +65,6 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+# Authlogic - An unobtrusive ruby authentication library based on ActiveRecord.
+gem 'authlogic'

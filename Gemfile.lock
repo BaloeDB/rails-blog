@@ -77,6 +77,11 @@ GEM
       tzinfo (~> 2.0)
     addressable (2.8.6)
       public_suffix (>= 2.0.2, < 6.0)
+    authlogic (6.4.3)
+      activemodel (>= 5.2, < 7.2)
+      activerecord (>= 5.2, < 7.2)
+      activesupport (>= 5.2, < 7.2)
+      request_store (~> 1.0)
     base64 (0.2.0)
     bigdecimal (3.1.8)
     bindex (0.8.1)
@@ -201,6 +206,8 @@ GEM
     regexp_parser (2.9.2)
     reline (0.5.9)
       io-console (~> 0.5)
+    request_store (1.7.0)
+      rack (>= 1.4)
     rexml (3.3.0)
       strscan
     rubyzip (2.3.2)
@@ -257,6 +264,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  authlogic
   bootsnap
   capybara
   debug
