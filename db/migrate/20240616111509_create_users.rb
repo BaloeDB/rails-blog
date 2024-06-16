@@ -34,9 +34,9 @@ class CreateUsers < ActiveRecord::Migration[7.1]
       t.string    :last_login_ip
 
       # See "Magic States" in Authlogic::Session::Base
-      t.boolean   :active, default: false
-      t.boolean   :approved, default: false
-      t.boolean   :confirmed, default: false
+      t.boolean   :active, default: true
+      t.boolean   :approved, default: true
+      t.boolean   :confirmed, default: true
 
       t.timestamps
     end

@@ -31,9 +31,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_16_111606) do
     t.datetime "last_login_at"
     t.string "current_login_ip"
     t.string "last_login_ip"
-    t.boolean "active", default: false
-    t.boolean "approved", default: false
-    t.boolean "confirmed", default: false
+    t.boolean "active", default: true
+    t.boolean "approved", default: true
+    t.boolean "confirmed", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
