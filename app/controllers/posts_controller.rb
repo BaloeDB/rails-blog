@@ -30,9 +30,9 @@ class PostsController < ApplicationController
     end
 
     def update
-        @post = Post.new(title: post_params[:title], body: post_params[:body], user: current_user)
+        @post = Post.find(params[:id])
 
-        if @post.update(post_params)
+        if @post.update(title: post_params[:title], body: post_params[:body], user: current_user)
             redirect_to @post
         else
             render :edit, status: :unprocessable_entity

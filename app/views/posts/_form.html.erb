@@ -1,23 +1,22 @@
-<%= form_with model: post do |form| %>
-  <div>
-    <%= form.label :title %><br>
-    <%= form.text_field :title %>
-    <% post.errors.full_messages_for(:title).each do |message| %>
-      <div><%= message %></div>
+<%= form_with model: post, class:"space-y-6" do |form| %>
+  <div class="rounded-md shadow-sm -space-y-px">
+    <div>
+      <%= form.label :title, class:"sr-only" %>
+      <%= form.text_field :title, required: true, placeholder:"Title", 
+          class:"appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md font-bold text-xl focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"  %>
+    </div>
+    <div>
+      <%= form.label :body, class:"sr-only" %>
+      <%= form.text_area :body, required: true, placeholder:"Body",
+      class:"appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" %>
+    </div>
+  </div>
+  <div id="error-messages" class="text-red-500 font-bold">
+    <% post.errors.full_messages.each do |message| %>
+      <p><%= message %></p>
     <% end %>
   </div>
-  <br />
-
   <div>
-    <%= form.label :body %><br>
-    <%= form.text_area :body %><br>
-    <% post.errors.full_messages_for(:body).each do |message| %>
-      <div><%= message %></div>
-    <% end %>
-  </div>
-  <br />
-
-  <div>
-    <span>Submit: </span><%= form.submit %>
+    <%= form.submit class:"group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
   </div>
 <% end %>
