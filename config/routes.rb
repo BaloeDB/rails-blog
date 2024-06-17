@@ -10,5 +10,7 @@ Rails.application.routes.draw do
 
   resources :users
   resources :user_sessions
-  resources :posts
+  resources :posts  do
+    resources :comments
+  end
 end
