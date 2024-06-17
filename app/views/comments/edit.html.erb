@@ -3,7 +3,6 @@
     <div>
       <%= link_to "Go back to post",  @post, class:"text-blue-500 hover:underline" %>
       <h1 class="text-2xl font-bold">Edit comment on <%= @post.title %></h1>
-      <p><%= @comment.body %></p>
     </div>
     <div class="mt-4">
       <%= render "comments/form" %>

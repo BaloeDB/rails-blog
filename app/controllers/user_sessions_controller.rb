@@ -1,6 +1,5 @@
 class UserSessionsController < ApplicationController
     skip_before_action :require_login, only: [:new, :create]
-    skip_before_action :require_permission
   
     # Somehow this methods get called instead of destroy, why?
     def show

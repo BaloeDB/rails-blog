@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
-    skip_before_action :require_permission, only: [:show]
+    before_action :write_access_post
+    skip_before_action :write_access_post, only: [:index, :show]
 
     def index
         @posts = Post.all
@@ -53,4 +54,13 @@ class PostsController < ApplicationController
         def post_params
             params.require(:post).permit(:title, :body)
         end
+
+    private
+      def write_access_post
+        @post = Post.find(params[:id])
+        unless current_user.id == @post.user.id
+          flash[:error] = "You don't have permissions for this action"
+          redirect_to @post # halts request cycle
+        end
+      end
 end

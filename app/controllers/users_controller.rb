@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
     skip_before_action :require_login, only: [:new, :create]
-    skip_before_action :require_permission, only: [:new, :create]
     
     def index
       @users = User.all
@@ -48,5 +47,14 @@ class UsersController < ApplicationController
     private
       def user_params
         params.require(:user).permit(:login, :password, :email, :password_confirmation)
+      end
+
+    private
+      def write_access_user
+        @user = Post.find(params[:id])
+        unless current_user.id == @user.id
+          flash[:error] = "You don't have permissions for this action"
+          redirect_to @post # halts request cycle
+        end
       end
   end

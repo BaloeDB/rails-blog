@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
-    skip_before_action :require_permission
+    before_action :write_access_comment
+    skip_before_action :write_access_comment, only: [:new]
 
     def new
         @post = Post.find(params[:post_id])
@@ -44,4 +45,14 @@ class CommentsController < ApplicationController
         def comment_params
             params.require(:comment).permit(:body)
         end
+
+    private
+      def write_access_comment
+        @post = Post.find(params[:post_id])
+        @comment = @post.comments.find(params[:id])
+        unless current_user.id == @comment.user.id
+          flash[:error] = "You don't have permissions for this action"
+          redirect_to @post # halts request cycle
+        end
+      end
 end

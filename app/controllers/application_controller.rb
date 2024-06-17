@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
     helper_method :current_user_session, :current_user
-    before_action :require_login, :require_permission
-  
+    before_action :require_login
+    
     private
       def current_user_session
         return @current_user_session if defined?(@current_user_session)
@@ -18,20 +18,6 @@ class ApplicationController < ActionController::Base
         unless current_user != nil
           flash[:error] = "You must be logged in to access this section"
           redirect_to new_user_session_path # halts request cycle
-        end
-      end
-
-
-    # This should work for multiple types of objects (user, comment, post)
-    private
-      def require_permission
-        @id = params[:id]
-        if !@id.nil?
-          @post = Post.find(@id)
-          unless current_user.id != @post.id
-            flash[:error] = "You don't have permissions for this action"
-            redirect_to @post # halts request cycle
-          end
         end
       end
 
