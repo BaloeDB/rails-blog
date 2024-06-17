@@ -1,21 +1,30 @@
-<%= link_to "Link: Home",  root_path %>
-
-<br /><br />
-<h1>Title: <%= @post.title %></h1>
-
-<p>Body: <%= @post.body %></p>
-<p>User: <%= @user %></p>
-<p>Created At: <%= @post.created_at %></p>
-<p>Updated At: <%= @post.updated_at %></p>
-
-<% if @can_edit %>
-    <br />
-    <ul>
-    <li><%= link_to "Action: Edit", edit_post_path(@post) %></li>
-    <li><%= link_to "Action: Destroy", post_path(@post), data: {
+<div class="flex flex-col items-center min-h-screen py-2">
+  <div class="flex flex-col w-full p-8 text-gray-800 bg-white shadow-lg pin-r pin-y md:w-full lg:w-full">
+    <div>
+      <%= link_to "View other blog posts",  root_path, class:"text-blue-500 hover:underline" %>
+    </div>
+    <div class="flex-1">
+      <div class="flex justify-between items-center">
+        <h1 class="text-2xl font-bold">(<%= @user %>) <%= @post.title %></h1>
+        <% if @can_edit %>
+          <div class="space-x-4">
+            <%= link_to "Edit", edit_post_path(@post), class:"px-4 py-2 text-black font-bold bg-blue-400 rounded hover:bg-blue-600 inline-block" %>
+            <%= link_to "Delete", post_path(@post), data: {
                         turbo_method: :delete,
                         turbo_confirm: "Are you sure?"
-                    } %></li>
-    </ul>
-<% end %>
+                    }, class: "px-4 py-2 text-black font-bold bg-red-400 rounded hover:bg-red-600 inline-block"  %>
+          </div>
+        <% end %>
+      </div>
+      <% if @post.updated_at != @post.created_at %>
+        <p class="pt-1"><span class="line-through"><%= @post.created_at.strftime("%B %d, %Y") %></span> 
+        <%= @post.updated_at.strftime("%B %d, %Y") %></p>
+      <% else %>
+        <p class="pt-1"><%= @post.updated_at.strftime("%B %d, %Y") %></p>
+      <% end %>
+    </div>
+    <div class="pt-8"><%= @post.body %></div>
+  </div>
+</div>
+
 
