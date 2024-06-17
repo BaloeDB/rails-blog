@@ -24,6 +24,30 @@
       <% end %>
     </div>
     <div class="pt-8 whitespace-pre"><%= @post.body %></div>
+    <div class="flex justify-between items-center pt-4 mb-4">
+      <h2 class="text-xl font-bold">Comments</h2>
+      <% if true %>
+        <div class="space-x-4">
+          <%= link_to "Add", new_post_comment_path(@post), class:"px-4 py-2 text-black font-bold bg-green-400 rounded hover:bg-green-600 inline-block" %>
+        </div>
+      <% end %>
+    </div>
+    <div>
+      <% @post.comments.each do |comment| %>
+        <div class="flex justify-between items-center pt-4">
+          <p>(<%= comment.user.login %>) <%= comment.body %></p>
+          <% if true %>
+            <div class="space-x-4">
+              <%= link_to "Edit", edit_post_comment_path(@post, comment), class:"px-4 py-2 text-black font-bold bg-blue-400 rounded hover:bg-blue-600 inline-block" %>
+              <%= link_to "Delete", post_comment_path(@post, comment), data: {
+                          turbo_method: :delete,
+                          turbo_confirm: "Are you sure?"
+                      }, class: "px-4 py-2 text-black font-bold bg-red-400 rounded hover:bg-red-600 inline-block"  %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
   </div>
 </div>
 

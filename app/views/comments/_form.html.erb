@@ -1,18 +1,13 @@
-<%= form_with model: post, class:"space-y-6" do |form| %>
+<%= form_with model: [ @post, @comment ], class:"space-y-6" do |form| %>
   <div class="rounded-md shadow-sm -space-y-px">
     <div>
-      <%= form.label :title, class:"sr-only" %>
-      <%= form.text_field :title, required: true, placeholder:"Title", 
-          class:"appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md font-bold text-xl focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"  %>
-    </div>
-    <div>
       <%= form.label :body, class:"sr-only" %>
-      <%= form.text_area :body, required: true, placeholder:"Body", rows: post.body.nil? ? 5 : post.body.count("\n") + 1, 
+      <%= form.text_area :body, required: true, placeholder:"Body", rows: @comment.body.nil? ? 5 : @comment.body.count("\n") + 1, 
       class:"appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" %>
     </div>
   </div>
   <div id="error-messages" class="text-red-500 font-bold">
-    <% post.errors.full_messages.each do |message| %>
+    <% @comment.errors.full_messages.each do |message| %>
       <p><%= message %></p>
     <% end %>
   </div>

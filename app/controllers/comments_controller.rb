@@ -1,17 +1,5 @@
 class CommentsController < ApplicationController
-    skip_before_action :require_permission, only: [:show]
-
-    def index
-        @post = Post.find(params[:post_id])
-        @comments = @post.comments
-    end
-
-    def show
-        @post = Post.find(params[:post_id])
-        @comment = @post.comments.find(params[:comment_id])
-        @user = User.find(@post.user_id).login
-        @can_edit = @comment.user == current_user
-    end
+    skip_before_action :require_permission
 
     def new
         @post = Post.find(params[:post_id])
@@ -20,7 +8,7 @@ class CommentsController < ApplicationController
 
     def create
         @post = Post.find(params[:post_id])
-        @comment = @post.comments.create(body: comment_params[:body], post: @post, user: current_user)
+        @comment = @post.comments.create(body: comment_params[:body], user: current_user)
 
         if @comment.save
             redirect_to post_path(@post)
@@ -31,7 +19,7 @@ class CommentsController < ApplicationController
 
     def edit
         @post = Post.find(params[:post_id])
-        @comment = @post.comments.find(params[:comment_id])
+        @comment = @post.comments.find(params[:id])
     end
 
     def update
@@ -46,7 +34,7 @@ class CommentsController < ApplicationController
 
     def destroy
         @post = Post.find(params[:post_id])
-        @comment = @post.comments.find(params[:comment_id])
+        @comment = @post.comments.find(params[:id])
         @comment.destroy
 
         redirect_to @post, status: :see_other
