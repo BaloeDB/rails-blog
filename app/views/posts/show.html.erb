@@ -34,17 +34,30 @@
     </div>
     <div>
       <% @post.comments.each do |comment| %>
-        <div class="flex justify-between items-center pt-4">
-          <p>(<%= comment.user.login %>) <%= comment.body %></p>
-          <% if comment.user == @current_user %>
-            <div class="space-x-4">
-              <%= link_to "Edit", edit_post_comment_path(@post, comment), class:"px-4 py-2 text-black font-bold bg-blue-400 rounded hover:bg-blue-600 inline-block" %>
-              <%= link_to "Delete", post_comment_path(@post, comment), data: {
-                          turbo_method: :delete,
-                          turbo_confirm: "Are you sure?"
-                      }, class: "px-4 py-2 text-black font-bold bg-red-400 rounded hover:bg-red-600 inline-block"  %>
+        <div class="p-6 w-full max-w-smbg-white rounded-xl shadow-md flex items-center space-x-4">
+          <div class="w-full">
+            <div class="w-full flex justify-between items-center">
+              <h2 class="text-xl font-medium text-black"><%= comment.user.login %></h1>
+              <% if comment.user == @current_user %>
+                <div class="space-x-4">
+                  <%= link_to "Edit", edit_post_comment_path(@post, comment), class:"px-4 py-2 text-black font-bold bg-blue-400 rounded hover:bg-blue-600 inline-block" %>
+                  <%= link_to "Delete", post_comment_path(@post, comment), data: {
+                              turbo_method: :delete,
+                              turbo_confirm: "Are you sure?"
+                          }, class: "px-4 py-2 text-black font-bold bg-red-400 rounded hover:bg-red-600 inline-block"  %>
+                </div>
+              <% end %>
             </div>
-          <% end %>
+            <p class="text-gray-500">
+              <% if comment.updated_at != comment.created_at %>
+                <span><span class="line-through"><%= comment.created_at.strftime("%B %d, %Y") %></span> 
+                <%= comment.updated_at.strftime("%B %d, %Y") %></span>
+              <% else %>
+                <span><%= @post.updated_at.strftime("%B %d, %Y") %></span>
+              <% end %>
+            </p>
+            <p class="mt-2 text-gray-500"><%= comment.body %></p>
+          </div>
         </div>
       <% end %>
     </div>

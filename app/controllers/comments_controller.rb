@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
     before_action :write_access_comment
-    skip_before_action :write_access_comment, only: [:new]
+    skip_before_action :write_access_comment, only: [:new, :create]
 
     def new
         @post = Post.find(params[:post_id])
