@@ -1,0 +1,23 @@
+<div>
+    <div class="flex-1">
+        <div class="flex justify-between items-center">
+        <h1 class="text-2xl font-bold">(<%= @user %>) <%= @post.title %></h1>
+        <% if @can_edit %>
+            <div class="space-x-4">
+            <%= link_to "Edit", edit_post_path(@post), class:"px-4 py-2 text-black font-bold bg-blue-400 rounded hover:bg-blue-600 inline-block" %>
+            <%= link_to "Delete", post_path(@post), data: {
+                        turbo_method: :delete,
+                        turbo_confirm: "Are you sure?"
+                    }, class: "px-4 py-2 text-black font-bold bg-red-400 rounded hover:bg-red-600 inline-block"  %>
+            </div>
+        <% end %>
+        </div>
+        <% if @post.updated_at != @post.created_at %>
+        <p class="pt-1"><span class="line-through"><%= @post.created_at.strftime("%B %d, %Y") %></span> 
+        <%= @post.updated_at.strftime("%B %d, %Y") %></p>
+        <% else %>
+        <p class="pt-1"><%= @post.updated_at.strftime("%B %d, %Y") %></p>
+        <% end %>
+    </div>
+    <div class="pt-8 whitespace-pre"><%= @post.body %></div>
+</div>

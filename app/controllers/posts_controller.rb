@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
     before_action :write_access_post
-    skip_before_action :write_access_post, only: [:index, :show]
+    skip_before_action :write_access_post, only: [:index, :show, :create, :new]
 
     def index
         @posts = Post.all
